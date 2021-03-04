@@ -1,5 +1,6 @@
 from api import db
-from api.endpoints.authors.model import AuthorModel
+from api.models.author import AuthorModel
+
 
 class QuoteModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)

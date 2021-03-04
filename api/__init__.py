@@ -3,8 +3,6 @@ from flask import Flask, request
 from flask_restful import Api, Resource, reqparse
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-# from api.endpoints.quotes.model import QuoteModel
-# from api.endpoints.authors.model import AuthorModel
 
 
 class UnicodeApi(Api):
