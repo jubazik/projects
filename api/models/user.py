@@ -1,7 +1,8 @@
 from api import db, Config, ma
 from passlib.apps import custom_app_context as pwd_context
-from itsdangerous import (TimedJSONWebSignatureSerializer
-                          as Serializer, BadSignature, SignatureExpired)
+from itsdangerous import URLSafeTimedSerializer as Serializer
+from itsdangerous import BadSignature, SignatureExpired
+
 from sqlalchemy.exc import IntegrityError
 
 
