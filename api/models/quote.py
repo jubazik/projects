@@ -14,6 +14,6 @@ class QuoteModel(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "quote": self.text,
+            "text": self.text,
             "author": self.author.to_dict()
         }
