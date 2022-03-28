@@ -2,7 +2,9 @@ from api import Resource, reqparse, db
 from api.models.author import AuthorModel
 from api.models.quote import QuoteModel
 
-
+# /authors/<int:author_id>/quotes/<int:quote_id>
+# /authors/<int:author_id>/quotes
+# /quotes
 class QuoteResource(Resource):
     def get(self, author_id=None, quote_id=None):
         """
@@ -20,8 +22,8 @@ class QuoteResource(Resource):
             quotes = author.quotes.all()
             return [quote.to_dict() for quote in quotes], 200  # Возвращаем все цитаты автора
 
-        quote = QuoteModel.query.get(id)
-        if quote is None:
+        quote = QuoteModel.query.get(quote_id)
+        if quote:
             return quote.to_dict(), 200
         return {"Error": "Quote not found"}, 404
 

@@ -1,7 +1,8 @@
 from api import Resource, reqparse, db
 from api.models.author import AuthorModel
 
-
+# GET: /authors - authors list
+# GET: /authors/1 - author by id
 class AuthorResource(Resource):
     def get(self, author_id=None):  # Если запрос приходит по url: /authors
         if author_id is None:
