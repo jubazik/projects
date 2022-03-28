@@ -35,3 +35,6 @@ class AuthorResource(Resource):
         author.name = author_data["name"]
         db.session.commit()
         return author.to_dict(), 200
+
+    def delete(self, quote_id):
+        raise NotImplemented("Метод не реализован")
