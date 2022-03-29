@@ -1,5 +1,6 @@
 from api import Resource, reqparse, db
 from api.models.author import AuthorModel
+from api.schemas.author import author_schema, authors_schema
 
 
 # GET: /authors/1 - author by id
@@ -9,7 +10,7 @@ class AuthorResource(Resource):
         if author is None:
             return f"Author id={author_id} not found", 404
 
-        return author.to_dict(), 200
+        return author_schema.dump(author), 200
 
     def put(self, author_id):
         parser = reqparse.RequestParser()
