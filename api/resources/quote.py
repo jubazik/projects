@@ -1,4 +1,4 @@
-from api import Resource, reqparse, db
+from api import Resource, reqparse, db, auth, g
 from api.models.author import AuthorModel
 from api.models.quote import QuoteModel
 
@@ -39,6 +39,7 @@ class QuotesListResource(Resource):
         quotes = author.quotes.all()
         return [quote.to_dict() for quote in quotes], 200  # Возвращаем все цитаты автора
 
+    @auth.login_required
     def post(self, author_id):
         parser = reqparse.RequestParser()
         parser.add_argument("text", required=True)
