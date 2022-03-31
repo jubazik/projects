@@ -133,7 +133,7 @@ class TestNotes(TestCase):
                 f"{user_data['username']}:{user_data['password']}".encode('ascii')).decode('utf-8')
         }
 
-    def test_create_node(self):
+    def test_create_note(self):
         note_data = {
             "text": 'Test note 1',
             "private": False

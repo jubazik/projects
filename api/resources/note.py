@@ -57,7 +57,7 @@ class NotesListResource(Resource):
         parser.add_argument("text", required=True)
         # Подсказка: чтобы разобраться с private="False",
         #   смотрите тут: https://flask-restful.readthedocs.io/en/latest/reqparse.html#request-parsing
-        parser.add_argument("private", required=True)
+        parser.add_argument("private", type=bool, required=True)
         note_data = parser.parse_args()
         note = NoteModel(author_id=author.id, **note_data)
         note.save()
