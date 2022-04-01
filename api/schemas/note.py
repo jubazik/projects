@@ -16,5 +16,13 @@ class NoteSchema(ma.SQLAlchemySchema):
     author = ma.Nested(UserSchema())
 
 
+class NoteRequestSchema(ma.SQLAlchemySchema):
+    class Meta:
+        model = NoteModel
+
+    text = ma.Str(required=True)
+    private = ma.Bool()
+
+
 note_schema = NoteSchema()
 notes_schema = NoteSchema(many=True)

@@ -1,10 +1,16 @@
 from api import auth, abort, g, Resource, reqparse
 from api.models.note import NoteModel
-from api.schemas.note import note_schema, notes_schema
+from api.schemas.note import note_schema, notes_schema, NoteSchema, NoteRequestSchema
+from flask_apispec.views import MethodResource
+from flask_apispec import marshal_with, use_kwargs, doc
 
 
-class NoteResource(Resource):
+@doc(tags=["Notes"])
+class NoteResource(MethodResource):
     @auth.login_required
+    @doc(security=[{"basicAuth": []}])
+    @doc(summary="Get Note by id")
+    @marshal_with(NoteSchema, code=200)
     def get(self, note_id):
         """
         Пользователь может получить ТОЛЬКО свою заметку
@@ -45,20 +51,21 @@ class NoteResource(Resource):
         return note_dict, 200
 
 
-class NotesListResource(Resource):
+@doc(tags=["Notes"])
+class NotesListResource(MethodResource):
+    @doc(summary="Get all notes")
+    @marshal_with(NoteSchema(many=True), code=200)
     def get(self):
         notes = NoteModel.query.all()
-        return notes_schema.dump(notes), 200
+        return notes, 200
 
     @auth.login_required
-    def post(self):
+    @doc(security=[{"basicAuth": []}])
+    @doc(summary="Create new note")
+    @marshal_with(NoteSchema, code=201)
+    @use_kwargs(NoteRequestSchema, location="json")
+    def post(self, **kwargs):
         author = g.user
-        parser = reqparse.RequestParser()
-        parser.add_argument("text", required=True)
-        # Подсказка: чтобы разобраться с private="False",
-        #   смотрите тут: https://flask-restful.readthedocs.io/en/latest/reqparse.html#request-parsing
-        parser.add_argument("private", type=bool, required=True)
-        note_data = parser.parse_args()
-        note = NoteModel(author_id=author.id, **note_data)
+        note = NoteModel(author_id=author.id, **kwargs)
         note.save()
-        return note_schema.dump(note), 201
+        return note, 201

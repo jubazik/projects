@@ -33,9 +33,11 @@ class UserResource(MethodResource):
 
 @doc(tags=["Users"])
 class UsersListResource(MethodResource):
+    @doc(summary="Get all users")
+    @marshal_with(UserSchema(many=True), code=200)
     def get(self):
         users = UserModel.query.all()
-        return users_schema.dump(users), 200
+        return users, 200
 
     @doc(summary="Create new User")
     @marshal_with(UserSchema, code=201)
