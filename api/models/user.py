@@ -28,6 +28,9 @@ class UserModel(db.Model):
         s = Serializer(Config.SECRET_KEY, expires_in=expiration)
         return s.dumps({'id': self.id})
 
+    def get_roles(self):
+        return [self.role]
+
     def save(self):
         try:
             db.session.add(self)
