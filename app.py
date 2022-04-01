@@ -25,5 +25,6 @@ api.add_resource(NoteResource,
                  '/notes/<int:note_id>',  # GET, PUT, DELETE
                  )
 docs.register(UserResource)
+docs.register(UsersListResource)
 if __name__ == '__main__':
     app.run(debug=Config.DEBUG, port=Config.PORT)
