@@ -1,5 +1,6 @@
 from api import auth, abort, g, Resource, reqparse
 from api.models.note import NoteModel
+from api.models.tag import TagModel
 from api.schemas.note import note_schema, notes_schema, NoteSchema, NoteRequestSchema
 from flask_apispec.views import MethodResource
 from flask_apispec import marshal_with, use_kwargs, doc
@@ -80,8 +81,9 @@ class NoteSetTagsResource(MethodResource):
     def put(self, note_id, **kwargs):
         note = NoteModel.query.get(note_id)
         if not note:
-            return {"error": f"note {note_id} not found"}
-        print("note kwargs = ", kwargs)
-        ...
-        ...
+            return {"error": f"note {note_id} not found"}, 404
+        for tag_id in kwargs["tags"]:
+            tag = TagModel.query.get(tag_id)
+            note.tags.append(tag)
+        note.save()
         return note, 200

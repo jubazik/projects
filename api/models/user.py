@@ -2,11 +2,12 @@ from api import db, Config, ma
 from passlib.apps import custom_app_context as pwd_context
 from itsdangerous import URLSafeTimedSerializer as Serializer
 from itsdangerous import BadSignature, SignatureExpired
+from api.models.mixins import ModelDBExt
 
 from sqlalchemy.exc import IntegrityError
 
 
-class UserModel(db.Model):
+class UserModel(db.Model, ModelDBExt):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(32), unique=True)
     password_hash = db.Column(db.String(128))
@@ -30,17 +31,6 @@ class UserModel(db.Model):
 
     def get_roles(self):
         return [self.role]
-
-    def save(self):
-        try:
-            db.session.add(self)
-            db.session.commit()
-        except IntegrityError:  # Обработка ошибки "создание пользователя с НЕ уникальным именем"
-            db.session.rollback()
-
-    def delete(self):
-        db.session.delete(self)
-        db.session.commit()
 
     @staticmethod
     def verify_auth_token(token):

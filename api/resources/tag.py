@@ -19,6 +19,11 @@ class TagResource(MethodResource):
 
 @doc(tags=["Tags"])
 class TagsListResource(MethodResource):
+    @marshal_with(TagSchema(many=True), code=200)
+    def get(self):
+        tags = TagModel.query.all()
+        return tags, 200
+    
     @use_kwargs(TagRequestSchema, location='json')
     @marshal_with(TagSchema, code=201)
     def post(self, **kwargs):
