@@ -1,0 +1,16 @@
+{
+  "model": "NoteModel",
+  "records": [
+    {
+      "text": "Admin note-1",
+      "author_id": 2,
+      "private": true
+    },
+    {
+      "text": "Admin note-2",
+      "author_id": 2,
+      "private": false
+    }
+  ]
+}
+
