@@ -3,13 +3,48 @@
   "records": [
     {
       "text": "Admin note-1",
-      "author_id": 2,
+      "author_id": 1,
       "private": true
     },
     {
       "text": "Admin note-2",
+      "author_id": 1,
+      "private": true
+    },
+    {
+      "text": "Admin note-3",
+      "author_id": 1,
+      "private": true
+    },
+    {
+      "text": "Ivan note-1",
       "author_id": 2,
       "private": false
+    },
+    {
+      "text": "Ivan note-2",
+      "author_id": 2,
+      "private": false
+    },
+    {
+      "text": "Petr note-1",
+      "author_id": 3,
+      "private": false
+    },
+    {
+      "text": "Petr note-2",
+      "author_id": 3,
+      "private": false
+    },
+    {
+      "text": "Petr note-3",
+      "author_id": 3,
+      "private": true
+    },
+    {
+      "text": "Petr note-4",
+      "author_id": 3,
+      "private": true
     }
   ]
 }

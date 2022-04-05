@@ -1,0 +1,15 @@
+{
+  "model": "TagModel",
+  "records": [
+    {
+      "name": "tag-adm"
+    },
+    {
+      "name": "tag-good"
+    },
+    {
+      "name": "tag-public"
+    }
+  ]
+}
+

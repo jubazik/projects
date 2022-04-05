@@ -1,18 +1,18 @@
-[
-  {
-    "username": "FixtureUser-1",
-    "password": "1234"
-  },
-  {
-    "username": "FixtureUser-2",
-    "password": "1234"
-  },
-  {
-    "username": "FixtureUser-5",
-    "password": "1234"
-  },
-  {
-    "username": "FixtureUser-4",
-    "password": "1234"
-  }
-]
+{
+  "model": "UserModel",
+  "records": [
+    {
+      "username": "admin",
+      "password": "admin"
+    },
+    {
+      "username": "Ivan",
+      "password": "ivan"
+    },
+    {
+      "username": "Petr",
+      "password": "petr"
+    }
+  ]
+}
+
