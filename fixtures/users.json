@@ -3,7 +3,8 @@
   "records": [
     {
       "username": "admin",
-      "password": "admin"
+      "password": "admin",
+      "role": "admin"
     },
     {
       "username": "Ivan",

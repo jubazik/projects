@@ -73,6 +73,15 @@ class NotesListResource(MethodResource):
         return note, 201
 
 
+@doc(tags=["Notes"])
+class NotesListByUserResource(MethodResource):
+    @doc(summary="Get all notes by user id")
+    @marshal_with(NoteSchema(many=True), code=200)
+    def get(self, user_id):
+        notes = NoteModel.query.join(NoteModel.author).filter_by(id=user_id).all()
+        return notes, 200
+
+
 @doc(tags=['Notes'])
 class NoteSetTagsResource(MethodResource):
     @doc(summary="Set tags to Note")

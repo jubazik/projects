@@ -7,6 +7,7 @@ from sqlalchemy.exc import IntegrityError
 
 from api.models.note import NoteModel
 from api.models.user import UserModel
+from api.models.tag import TagModel
 
 
 @click.command
@@ -16,6 +17,7 @@ def load_fixture(fixture):
     models = {
         "NoteModel": NoteModel,
         "UserModel": UserModel,
+        "TagModel": TagModel,
     }
     with open(path_to_fixture, "r", encoding="UTF-8") as f:
         data = json.load(f)
