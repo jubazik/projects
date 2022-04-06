@@ -96,3 +96,13 @@ class NoteSetTagsResource(MethodResource):
             note.tags.append(tag)
         note.save()
         return note, 200
+
+
+@doc(tags=['Notes'])
+class NotesPublicResource(MethodResource):
+    # GET: /notes/public
+    @doc(summary="Get all public notes")
+    @marshal_with(NoteSchema(many=True))
+    def get(self):
+        notes = NoteModel.query.filter_by(private=False).all()
+        return notes

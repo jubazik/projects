@@ -24,9 +24,14 @@ api.add_resource(note.NotesListResource,
                  )
 api.add_resource(note.NotesListByUserResource,
                  '/users/<user_id>/notes')  # GET
-
 api.add_resource(note.NoteResource,
                  '/notes/<int:note_id>',  # GET, PUT, DELETE
+                 )
+api.add_resource(note.NoteSetTagsResource,
+                 '/notes/<int:note_id>/set_tags',  # GET, PUT, DELETE
+                 )
+api.add_resource(note.NotesPublicResource,
+                 '/notes/public',  # GET
                  )
 api.add_resource(TagsListResource,
                  '/tags',  # GET, POST
@@ -34,10 +39,9 @@ api.add_resource(TagsListResource,
 api.add_resource(TagResource,
                  '/tags/<int:tag_id>',  # GET, PUT, DELETE
                  )
-api.add_resource(note.NoteSetTagsResource,
-                 '/notes/<int:note_id>/set_tags',  # GET, PUT, DELETE
-                 )
-
+# GET: /notes/filter?private=false
+# GET: /notes/filter?username=<un>&private=false
+# GET: /notes/filter?tag=<tag_name>
 docs.register(UserResource)
 docs.register(UsersListResource)
 docs.register(note.NoteResource)
@@ -46,5 +50,6 @@ docs.register(TagResource)
 docs.register(TagsListResource)
 docs.register(note.NoteSetTagsResource)
 docs.register(note.NotesListByUserResource)
+docs.register(note.NotesPublicResource)
 if __name__ == '__main__':
     app.run(debug=Config.DEBUG, port=Config.PORT)
