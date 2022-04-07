@@ -99,10 +99,17 @@ class NoteSetTagsResource(MethodResource):
 
 
 @doc(tags=['Notes'])
-class NotesPublicResource(MethodResource):
-    # GET: /notes/public
-    @doc(summary="Get all public notes")
+class NotesFilterResource(MethodResource):
+    # GET: /notes/filter
+    @doc(summary="Get notes with filters")
     @marshal_with(NoteSchema(many=True))
-    def get(self):
-        notes = NoteModel.query.filter_by(private=False).all()
-        return notes
+    @use_kwargs({"private": fields.Bool(), "username": fields.Str(), "tag_name": fields.Str()}, location="query")
+    def get(self, **kwargs):
+        notes = NoteModel.query
+        if kwargs.get("private"):
+            notes = notes.filter_by(private=kwargs["private"])
+        if kwargs.get("username"):
+            notes = notes.join(NoteModel.author).filter_by(username=kwargs["username"])
+        if kwargs.get("tag_name"):
+            notes = notes.join(NoteModel.tags).filter_by(name=kwargs["tag_name"])
+        return notes.all()

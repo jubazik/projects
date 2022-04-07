@@ -2,7 +2,7 @@ import click
 import json
 from api import db
 from api.schemas.user import UserRequestSchema
-from config import BASE_DIR, base_dir
+from config import BASE_DIR
 from sqlalchemy.exc import IntegrityError
 
 from api.models.note import NoteModel
