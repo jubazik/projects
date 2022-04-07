@@ -25,7 +25,7 @@ api.add_resource(note.NotesListResource,
 api.add_resource(note.NotesListByUserResource,
                  '/users/<user_id>/notes')  # GET
 api.add_resource(note.NoteResource,
-                 '/notes/<int:note_id>',  # GET, PUT, DELETE
+                 '/notes_list/<int:note_id>',  # GET, PUT, DELETE
                  )
 api.add_resource(note.NoteSetTagsResource,
                  '/notes/<int:note_id>/set_tags',  # GET, PUT, DELETE
@@ -38,7 +38,7 @@ api.add_resource(TagResource,
                  )
 # GET: /notes/filter?private=false
 # GET: /notes/filter?username=<un>&private=false
-# GET: /notes/filter?tag=<tag_name>
+# GET: /notes/filter?tag=good&username=Ivan
 api.add_resource(note.NotesFilterResource,
                  '/notes/filter',  # GET
                  )
