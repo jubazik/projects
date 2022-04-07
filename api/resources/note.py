@@ -116,3 +116,14 @@ class NotesFilterResource(MethodResource):
         if kwargs.get("tag_name"):
             notes = notes.join(NoteModel.tags).filter_by(name=kwargs["tag_name"])
         return notes.all()
+
+
+# PUT /notes/<note_id>/restore
+@doc(tags=["Notes"])
+class NoteRestoreResource(MethodResource):
+    @doc(summary="Restore note")
+    @marshal_with(NoteSchema, code=200)
+    def put(self, note_id):
+        note = get_object_or_404(NoteModel, note_id)
+        note.restore()
+        return note, 200

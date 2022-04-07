@@ -21,6 +21,10 @@ class NoteModel(db.Model, ModelDBExt):  # ORM
     tags = db.relationship(TagModel, secondary=tags, lazy='subquery', backref=db.backref('notes', lazy=True))
     is_archive = db.Column(db.Boolean(), server_default=expression.false(), default=False, nullable=False)
 
+    def restore(self):
+        self.is_archive = False
+        db.session.commit()
+
     def delete(self):
         self.is_archive = True
         db.session.commit()

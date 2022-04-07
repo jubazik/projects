@@ -25,7 +25,7 @@ api.add_resource(note.NotesListResource,
 api.add_resource(note.NotesListByUserResource,
                  '/users/<user_id>/notes')  # GET
 api.add_resource(note.NoteResource,
-                 '/notes_list/<int:note_id>',  # GET, PUT, DELETE
+                 '/notes/<int:note_id>',  # GET, PUT, DELETE
                  )
 api.add_resource(note.NoteSetTagsResource,
                  '/notes/<int:note_id>/set_tags',  # GET, PUT, DELETE
@@ -42,6 +42,9 @@ api.add_resource(TagResource,
 api.add_resource(note.NotesFilterResource,
                  '/notes/filter',  # GET
                  )
+api.add_resource(note.NoteRestoreResource,
+                 '/notes/<int:note_id>/restore',  # GET
+                 )
 
 docs.register(UserResource)
 docs.register(UsersListResource)
@@ -52,5 +55,6 @@ docs.register(TagsListResource)
 docs.register(note.NoteSetTagsResource)
 docs.register(note.NotesListByUserResource)
 docs.register(note.NotesFilterResource)
+docs.register(note.NoteRestoreResource)
 if __name__ == '__main__':
     app.run(debug=Config.DEBUG, port=Config.PORT)
