@@ -39,7 +39,7 @@ class QuotesListResource(Resource):
         quotes = author.quotes.all()
         return [quote.to_dict() for quote in quotes], 200  # Возвращаем все цитаты автора
 
-    @auth.login_required
+    # @auth.login_required
     def post(self, author_id):
         parser = reqparse.RequestParser()
         parser.add_argument("text", required=True)

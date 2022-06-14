@@ -38,7 +38,7 @@ class AuthorsListResource(Resource):
         parser = reqparse.RequestParser()
         parser.add_argument("name", required=True)
         author_data = parser.parse_args()
-        author = AuthorModel(author_data["name"])
+        author = AuthorModel(author_data['name'])
         db.session.add(author)
         db.session.commit()
         return author.to_dict(), 201
